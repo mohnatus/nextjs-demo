@@ -34,39 +34,23 @@ function PostPreview({ post }: PostPreviewProps) {
 
 const Posts: NextPageWithLayout<PostsProps> = function Posts({ posts }) {
   return (
-   <NestedLayout>
-      <MainLayout title="Posts">
-        <h1>Posts page</h1>
-  
-        <div>
-          {posts.map((post) => (
-            <PostPreview key={post.id} post={post} />
-          ))}
-        </div>
-      </MainLayout>
-   </NestedLayout>
+    <MainLayout title="Posts">
+      <h1>Posts page</h1>
+
+      <div>
+        {posts.map((post) => (
+          <PostPreview key={post.id} post={post} />
+        ))}
+      </div>
+    </MainLayout>
   );
 };
 
 Posts.getLayout = function getLayout(page: ReactElement) {
-  return <NestedLayout>
-    {page}
-  </NestedLayout>
-}
+  return <NestedLayout>{page}</NestedLayout>;
+};
 
 export default Posts;
-
-// export const getServerSideProps: GetServerSideProps<{
-//   posts: Array<Post>;
-// }> = async ({ query }) => {
-//   const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-//   const posts = await response.json();
-//   return {
-//     props: {
-//       posts,
-//     },
-//   };
-// };
 
 export const getStaticProps: GetStaticProps<{
   posts: Array<Post>;
